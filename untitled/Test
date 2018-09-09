@@ -1,0 +1,14 @@
+require 'rspec'
+require 'selenium-webdriver'
+require_relative 'PageObjects/home'
+
+describe 'testing the upwork webpage' do
+  chromedriver_path = File.join(File.absolute_path('', File.dirname("C:/Users/corre/RubymineProjects/Drivers")),"Drivers","chromedriver.exe")
+  Selenium::WebDriver::Chrome.driver_path = chromedriver_path
+
+  app = AbstractPage.new(Selenium::WebDriver.for(:chrome))
+  app.navigateToAppRoot
+      .performSearch('automation')
+
+
+end
