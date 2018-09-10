@@ -1,0 +1,15 @@
+
+require 'selenium-webdriver'
+require_relative 'PageObjects/home'
+
+  profile =  Selenium::WebDriver::Chrome::Profile.new
+  profile['network.cookie.cookieBehavior'] = 0
+  chromedriver_path = File.join(File.absolute_path('', File.dirname("./sources/chromedriver")),"chromedriver")
+  Selenium::WebDriver::Chrome.driver_path = chromedriver_path
+
+  app = AbstractPage.new(Selenium::WebDriver.for :chrome, :profile => profile)
+  app.navigateToAppRoot
+      .performSearch('automation')
+
+
+

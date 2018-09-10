@@ -7,11 +7,14 @@ class HomePage < AbstractPage
   end
 
   def performSearch(keyWord)
+    @@wait.until { @@driver.find_element(:css => "span.glyphicon.air-icon-arrow-expand") }
+    element = @@driver.find_element(:css => "span.glyphicon.air-icon-arrow-expand")
+    element.click
+    @@wait.until{@@driver.find_element(:css => "#visitor-nav > div.ng-scope > form > div > ul > li:nth-child(1) > a")}
+    @@driver.find_element(:css => "#visitor-nav > div.ng-scope > form > div > ul > li:nth-child(1) > a").click
+    @@driver.find_element(:name, 'q').click
     @@driver.find_element(:name, 'q').send_keys(keyWord)
-    @@wait.until { @@driver.find_element(:tag_name => "button") }
-      element = @@driver.find_elements(:tag_name => "button")
-      element[0].click
-    sleep(5)
+    @@driver.find_element(:name, 'q').send_keys(:return)
     return ResultsPage.new(@@driver)
   end
 
