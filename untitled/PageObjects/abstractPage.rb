@@ -12,7 +12,6 @@ class AbstractPage
 
   def navigateToAppRoot()
     @@driver.get("http://www.upwork.com")
-    @@driver.manage.delete_all_cookies
     @@driver.manage.window.maximize
 
     return HomePage.new(@@driver)

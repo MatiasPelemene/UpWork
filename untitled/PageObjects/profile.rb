@@ -1,0 +1,2 @@
+class ProfilePage < AbstractPage
+end
