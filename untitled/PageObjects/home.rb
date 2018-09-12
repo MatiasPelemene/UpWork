@@ -1,11 +1,17 @@
 require_relative '../PageObjects/abstractPage'
 require_relative '../PageObjects/result'
+
+#HomePage Class, contains the methods to interact with the webelements from home page
 class HomePage < AbstractPage
 
+  #Create an instance of HomePage
   def initialize(driver)
     super(driver)
   end
 
+  #perforSearch Performs a search of a freelancer profile
+  #keyWord The keyword to search a profile
+  # Returns an instance of the resultsPage
   def performSearch(keyWord)
     if @@driver.find_element(:css => "button.btn.p-xs-left-right.dropdown-toggle").displayed?
       @@driver.find_element(:css => "button.btn.p-xs-left-right.dropdown-toggle").click
