@@ -57,10 +57,6 @@ class ResultsPage < AbstractPage
         $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
       end
     end
-
-
-
-
   end
 
 
