@@ -24,9 +24,9 @@ class ResultsPage < AbstractPage
       }
       data.store(section.find_element(:css => "[data-qa='tile_name']").attribute("innerText").strip, datosPro )
 
-      return data
-    end
 
+    end
+    return data
   end
   def getSkills(elements)
     skills = Array.new
