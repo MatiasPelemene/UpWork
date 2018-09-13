@@ -30,21 +30,22 @@ class ResultsPage < AbstractPage
     return data
   end
   def getSkills(elements)
-    skills = Array.new
+    @skills = Array.new
     elements.each do |element|
-      skills.push(element.attribute("innerText").strip)
+      @skills.push(element.attribute("innerText").strip)
     end
-    return skills
+    return @skills
   end
 
   def verifyInfo
     data = getInfoProfiles
-    @skills = Array.new
+    @skillsV = Array.new
     for i in 0..9
-      @skills = data[i]['Skills']
-      @skills.each do |value|
+      @skillsV = data[i]['Skills']
+      @skillsV.each do |value|
         if(value == @@configuration['configuration']['keyword'])
           $stderr.puts(data[i]['Title'] + " has the keyword! on the skills attribute")
+          break
         else
           $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
         end
