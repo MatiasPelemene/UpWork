@@ -23,7 +23,8 @@ class ResultsPage < AbstractPage
           "Skills"=> getSkills(section.find_elements(:css =>("[data-log-label='skill pill']")))
       }
       data.store(section.find_element(:css => "[data-qa='tile_name']").attribute("innerText").strip, datosPro )
-      $stderr.puts "hash cargado"
+
+      return data
     end
 
   end
@@ -35,6 +36,13 @@ class ResultsPage < AbstractPage
     return skills
   end
 
+  def verifyInfo
+    dataToVerify = getInfoProfiles
+    dataToVerify.each do|key, value|
+      $stderr.put(key + value)
+    end
+
+  end
 
 
 

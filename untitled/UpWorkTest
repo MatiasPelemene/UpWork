@@ -12,8 +12,8 @@ require_relative 'PageObjects/home'
 
   app = AbstractPage.new(Selenium::WebDriver.for :firefox)
   app.navigateToAppRoot
-      .performSearch('react')
-      .getInfoProfiles
+      .performSearch()
+      .verifyInfo()
   app.quit
 
 
