@@ -10,13 +10,10 @@ class ResultsPage < AbstractPage
   #getInfoProfiles retrives the info of profile and creat an structure to handle it.
   def getInfoProfiles
     data = Hash.new
-    datosPro = Hash.new
-
     @@wait.until{@@driver.find_element(:css =>".filters-button")}
     @sections= @@driver.find_elements(:css => "[data-qa=freelancer]")
       @i=0
     @sections.each do |section|
-
       datosPro = {
           "Country" => section.find_element(:css => "strong.d-none.d-md-inline-block").attribute("innerText").strip,
           "Title" => section.find_element(:css => "[data-qa='tile_title']").attribute("innerText").strip,
@@ -25,10 +22,10 @@ class ResultsPage < AbstractPage
       }
       data.store(@i, datosPro )
       @i=@i+1
-
     end
     return data
   end
+
   def getSkills(elements)
     @skills = Array.new
     elements.each do |element|
@@ -58,7 +55,5 @@ class ResultsPage < AbstractPage
       end
     end
   end
-
-
 
 end
