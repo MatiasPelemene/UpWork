@@ -1,0 +1,19 @@
+
+require 'selenium-webdriver'
+require_relative 'PageObjects/home'
+
+
+
+geckopath_path = File.join(File.absolute_path('', File.dirname("./sources/geckodriver")),"geckodriver.exe")
+Selenium::WebDriver::Firefox.driver_path = geckopath_path
+
+# chromedriver_path = File.join(File.absolute_path('', File.dirname("./sources/chromedriver")),"chromedriver")
+# Selenium::WebDriver::Chrome.driver_path = chromedriver_path
+
+app = AbstractPage.new(Selenium::WebDriver.for :firefox)
+app.navigateToAppRoot
+    .performSearch()
+    .verifyInfo()
+app.quit
+
+

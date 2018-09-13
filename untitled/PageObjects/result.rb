@@ -14,6 +14,7 @@ class ResultsPage < AbstractPage
 
     @@wait.until{@@driver.find_element(:css =>".filters-button")}
     @sections= @@driver.find_elements(:css => "[data-qa=freelancer]")
+      @i=0
     @sections.each do |section|
 
       datosPro = {
@@ -22,8 +23,8 @@ class ResultsPage < AbstractPage
           "Salary" => section.find_element(:css =>"strong[class='pull-left']").attribute("innerText").strip,
           "Skills"=> getSkills(section.find_elements(:css =>("[data-log-label='skill pill']")))
       }
-      data.store(section.find_element(:css => "[data-qa='tile_name']").attribute("innerText").strip, datosPro )
-
+      data.store(@i, datosPro )
+      @i=@i+1
 
     end
     return data
@@ -37,10 +38,21 @@ class ResultsPage < AbstractPage
   end
 
   def verifyInfo
-    dataToVerify = getInfoProfiles
-    dataToVerify.each do|key, value|
-      $stderr.put(key + value)
+    data = getInfoProfiles
+    @skills = Array.new
+    for i in 0..9
+      @skills = data[i]['Skills']
+      @skills.each do |value|
+        if(value == @@configuration['configuration']['keyword'])
+          $stderr.puts(data[i]['Title'] + " has the keyword! on the skills attribute")
+        else
+          $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
+        end
+      end
     end
+
+
+
 
   end
 
