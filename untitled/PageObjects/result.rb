@@ -40,15 +40,21 @@ class ResultsPage < AbstractPage
   def verifyInfo
     data = getInfoProfiles
     @skillsV = Array.new
+    @flag
     for i in 0..9
       @skillsV = data[i]['Skills']
       @skillsV.each do |value|
         if(value == @@configuration['configuration']['keyword'])
-          $stderr.puts(data[i]['Title'] + " has the keyword! on the skills attribute")
+          @flag = true
           break
         else
-          $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
+          @flag = false
         end
+      end
+      if(@flag)
+        $stderr.puts(data[i]['Title'] + " has the keyword! on the skills attribute")
+      else
+        $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
       end
     end
 
