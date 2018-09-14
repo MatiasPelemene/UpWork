@@ -28,6 +28,7 @@ class HomePage < AbstractPage
     @@driver.find_element(:xpath => "//*[@id='q']").click
     @@driver.find_element(:xpath, "//*[@id='q']").send_keys(@@configuration['configuration']['keyword'])
     @@driver.find_element(:xpath, "//*[@id='q']").send_keys(:return)
+    $stderr.puts("Performs a search on the home page")
     return ResultsPage.new(@@driver)
   end
 

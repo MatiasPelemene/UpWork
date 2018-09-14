@@ -1,4 +1,6 @@
 require_relative '../PageObjects/abstractPage'
+require_relative '../PageObjects/profile'
+
 #ResultsPage Class contains the methods to interact with de results page
 class ResultsPage < AbstractPage
 
@@ -9,7 +11,7 @@ class ResultsPage < AbstractPage
 
   #getInfoProfiles retrives the info of profile and creat an structure to handle it.
   def getInfoProfiles
-    data = Hash.new
+    @data = Hash.new
     @@wait.until{@@driver.find_element(:css =>".filters-button")}
     @sections= @@driver.find_elements(:css => "[data-qa=freelancer]")
       @i=0
@@ -20,10 +22,10 @@ class ResultsPage < AbstractPage
           "Salary" => section.find_element(:css =>"strong[class='pull-left']").attribute("innerText").strip,
           "Skills"=> getSkills(section.find_elements(:css =>("[data-log-label='skill pill']")))
       }
-      data.store(@i, datosPro )
+      @data.store(@i, datosPro )
       @i=@i+1
     end
-    return data
+    return @data
   end
 
   def getSkills(elements)
@@ -54,6 +56,8 @@ class ResultsPage < AbstractPage
         $stderr.puts(data[i]['Title'] + " hasn't the keyword! on the skills attribute")
       end
     end
+    $stderr.puts("Retrive the info from all profiles displayed on the result page y verify if the skills has the keyword in it")
+    return ProfilePage.new(@@driver, data)
   end
 
 end

@@ -20,6 +20,7 @@ class AbstractPage
   def navigateToAppRoot()
     @@driver.get(@@configuration['configuration']['url'])
     @@driver.manage().delete_all_cookies()
+    $stderr.puts("It's open the browser and navigate to the url")
     return HomePage.new(@@driver)
   end
 
